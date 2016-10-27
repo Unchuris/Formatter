@@ -1,11 +1,25 @@
-import java.io.*;
 import com.Formatter;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 /**
- * Created by vlad on 19.10.16.
+ * Simplest Formatter implementation.
  */
-public class Main {
+public final class Main {
+    /**
+     * default constructor.
+     */
+    private Main() {
 
-    public static void main(String[] args) {
+     }
+    /**
+     * Entry method.
+     * @param args filenames
+     */
+     public static void main(final String[] args) {
         if (args.length >= 2) {
             File sourceName = new File(args[0]);
             File destinationName = new File(args[1]);
@@ -15,7 +29,8 @@ public class Main {
                     throw new IOException();
                 }
                 if (!destinationName.exists()) {
-                    destinationName.createNewFile();
+                    //destinationName.createNewFile();
+                    throw new IOException();
                 }
                 BufferedReader source = new BufferedReader(new FileReader(sourceName));
                 BufferedWriter destination = new BufferedWriter(new FileWriter(destinationName));

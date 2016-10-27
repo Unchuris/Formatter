@@ -1,4 +1,8 @@
+/target
 *.class
 *.jar
+*.war
+*.xml
 .idea
 .out
+test/

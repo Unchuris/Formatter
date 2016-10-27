@@ -5,11 +5,15 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 
 /**
- * Created by vlad on 19.10.16.
+ *edited the text style.
  */
-public class Formatter {
-
-    public void format(BufferedReader source, BufferedWriter destination) {
+public final class Formatter {
+    /**
+     *
+     * @param source source file
+     * @param destination output file
+     */
+    public void format(final BufferedReader source, final BufferedWriter destination) {
         try {
             int indent = 0;
             int symbol;
