@@ -1,5 +1,7 @@
 package com;
 
+import com.exception.WriteException;
+
 import java.io.IOException;
 
 /**
@@ -9,9 +11,9 @@ public interface IWrite {
     /**
      * write char.
      * @param c writeChar.
-     * @throws IOException exception.
+     * @throws WriteException exception.
      */
-    void writeChar(char c) throws IOException;
+    void writeChar(char c) throws WriteException;
 
     /**
      * close.

@@ -1,5 +1,8 @@
 package com;
 
+import com.exception.ReadException;
+import com.exception.WriteException;
+
 import java.io.IOException;
     /**
      *edited the text style.
@@ -10,10 +13,12 @@ import java.io.IOException;
          * @param source source file.
          * @param destination output file.
          * @throws IOException Exception.
+         * @throws ReadException Exception.
+         * @throws WriteException Exception.
          */
         private static void ignoreComment(final IReader source,
                                           final IWrite destination)
-                throws IOException {
+                throws IOException, ReadException, WriteException {
                 char symbol;
                 boolean commentMulti = false;
                 boolean commentOne = false;
@@ -67,13 +72,15 @@ import java.io.IOException;
          * @param source source file.
          * @param destination output file.
          * @param symbol symbol.
-         * @throws IOException Exception
+         * @throws IOException Exception.
+         * @throws ReadException Exception.
+         * @throws WriteException Exception.
          */
         private static void
         ignoreLiterals(final IReader source,
                                            final IWrite destination,
                                            final char symbol)
-                throws IOException {
+                throws IOException, ReadException, WriteException {
             char copySymbol, newCopySymbol;
             copySymbol = symbol;
             if ((copySymbol == '\'') || (copySymbol == '"')) {
@@ -145,6 +152,10 @@ import java.io.IOException;
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
+            } catch (ReadException e) {
+                e.printStackTrace();
+            } catch (WriteException e) {
+                e.printStackTrace();
             }
         }
     }

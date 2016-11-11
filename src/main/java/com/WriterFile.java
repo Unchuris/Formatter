@@ -1,4 +1,6 @@
 package com;
+import com.exception.WriteException;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,10 +26,14 @@ public class WriterFile implements IWrite {
     /**
      *
      * @param c writeChar.
-     * @throws IOException exception.
+     * @throws WriteException exception.
      */
-    public final void writeChar(final char c) throws IOException {
-        buffer.append(c);
+    public final void writeChar(final char c) throws WriteException {
+        try {
+            buffer.append(c);
+        } catch (IOException e) {
+            throw new WriteException("error");
+        }
     }
 
     /**

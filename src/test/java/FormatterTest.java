@@ -1,6 +1,10 @@
 import com.*;
+import com.exception.ExceptionFormatter;
 import org.junit.Before;
 import org.junit.Test;
+import toString.Reader;
+import toString.ReaderFile;
+
 import java.io.IOException;
 
 import static junit.framework.TestCase.assertEquals;
@@ -17,7 +21,7 @@ public class FormatterTest {
         formatter = new Formatter();
     }
     @Test
-    public void  two() throws IOException {
+    public void  two() throws IOException, ExceptionFormatter {
 
         IReader source = new ReadFile("src/main/resources/input");
         IWrite destination = new WriterFile("src/main/resources/output");

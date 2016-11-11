@@ -1,17 +1,21 @@
+package toString;
+
+import com.exception.ReadException;
 import com.ReadFile;
+import toString.Reader;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /**
- * .
+ * toString.
  */
-public class ReaderFile extends ReadFile implements Reader  {
+public class ReaderFile extends ReadFile implements Reader {
     /**
      * @param sourceName filename.
      * @throws FileNotFoundException exception.
      */
-    ReaderFile(String sourceName) throws FileNotFoundException {
+    public ReaderFile(String sourceName) throws FileNotFoundException {
         super(sourceName);
     }
     public final String toString() {
@@ -23,6 +27,8 @@ public class ReaderFile extends ReadFile implements Reader  {
                 builder.append(next);
             }
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ReadException e) {
             e.printStackTrace();
         }
         return builder.toString();

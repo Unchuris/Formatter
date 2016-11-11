@@ -1,4 +1,6 @@
 package com;
+import com.exception.ReadException;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -42,9 +44,13 @@ public class ReadFile implements IReader {
     /**
      *
      * @return boolean.
-     * @throws IOException exception.
+     * @throws ReadException exception.
      */
-    public final boolean hasChars() throws IOException {
+    public final boolean hasChars() throws ReadException {
+        try {
             return buffer.ready();
+        } catch (IOException e) {
+            throw new ReadException("Buffer isn't ready");
+        }
     }
 }
