@@ -1,5 +1,7 @@
 package com;
 
+import com.exception.ExceptionFormatter;
+
 import java.io.IOException;
 /**
  * Simplest com.Formatter implementation.
@@ -15,10 +17,10 @@ public final class Main {
      /**
      * Entry method.
      * @param args filenames.
-     * @throws IOException exception.
+     * @throws ExceptionFormatter exception.
      */
      public static void main(final String[] args)
-             throws IOException {
+             throws ExceptionFormatter {
         try {
                 Formatter formatter = new Formatter();
                 IReader source = new
@@ -28,7 +30,7 @@ public final class Main {
                 formatter.format(source, destination);
                 destination.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new ExceptionFormatter("File is error");
               }
         }
     }

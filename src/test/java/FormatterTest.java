@@ -21,7 +21,7 @@ public class FormatterTest {
         formatter = new Formatter();
     }
     @Test
-    public void  two() throws IOException, ExceptionFormatter {
+    public void  two() throws IOException {
 
         IReader source = new ReadFile("src/main/resources/input");
         IWrite destination = new WriterFile("src/main/resources/output");

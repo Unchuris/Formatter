@@ -1,7 +1,6 @@
 package com;
 
 import com.exception.ReadException;
-
 import java.io.IOException;
 
 /**
@@ -11,17 +10,16 @@ public interface IReader {
     /**
      *
      * @return boolean.
-     * @throws IOException exception.
      * @throws ReadException exception.
      */
-    boolean hasChars() throws IOException, ReadException;
+    boolean hasChars() throws ReadException;
 
     /**
      *
      * @return char.
-     * @throws IOException exception.
+     * @throws ReadException exception.
      */
-    char readChar() throws IOException;
+    char readChar() throws ReadException;
     /**
      *
      * @throws IOException exception.

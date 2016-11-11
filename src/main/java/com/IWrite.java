@@ -1,7 +1,6 @@
 package com;
 
 import com.exception.WriteException;
-
 import java.io.IOException;
 
 /**

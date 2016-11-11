@@ -27,10 +27,15 @@ public class ReadFile implements IReader {
     /**
      *
      * @return char.
-     * @throws IOException exception.
+     * @throws ReadException exception.
      */
-    public final char readChar() throws IOException {
-        int c = this.buffer.read();
+    public final char readChar() throws ReadException {
+        int c = 0;
+        try {
+            c = this.buffer.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return (char) c;
     }
 

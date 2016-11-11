@@ -26,8 +26,6 @@ public class ReaderFile extends ReadFile implements Reader {
                 next = this.readChar();
                 builder.append(next);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (ReadException e) {
             e.printStackTrace();
         }
