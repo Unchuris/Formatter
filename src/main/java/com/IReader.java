@@ -20,13 +20,6 @@ public interface IReader {
      * @throws IOException exception.
      */
     char readChar() throws IOException;
-
-    /**
-     *
-     * @return String.
-     */
-    String toString();
-
     /**
      *
      * @throws IOException exception.

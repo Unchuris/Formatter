@@ -16,20 +16,19 @@ public class FormatterTest {
     public void setUp() {
         formatter = new Formatter();
     }
-
     @Test
     public void  two() throws IOException {
 
-        IReader source = new StringReader("src/main/resources/input");
-        IWrite destination = new StringWriter("src/main/resources/output");
+        IReader source = new ReadFile("src/main/resources/input");
+        IWrite destination = new WriterFile("src/main/resources/output");
 
         formatter.format(source, destination);
 
         source.close();
         destination.close();
 
-        IReader rez = new StringReader("src/test/java/rez");
-        IReader output = new StringReader("src/main/resources/output");
+        Reader rez = new ReaderFile("src/test/java/rez");
+        Reader output = new ReaderFile("src/main/resources/output");
 
         assertEquals(rez.toString(), output.toString());
     }

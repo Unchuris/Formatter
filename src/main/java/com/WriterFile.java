@@ -6,7 +6,7 @@ import java.io.IOException;
 /**
  * Writer.
  */
-public class StringWriter implements IWrite {
+public class WriterFile implements IWrite {
     /**
      * buffer.
      */
@@ -17,7 +17,7 @@ public class StringWriter implements IWrite {
      * @param destinationName filename.
      * @throws IOException exception.
      */
-    public StringWriter(final String destinationName) throws IOException {
+    public WriterFile(final String destinationName) throws IOException {
         buffer = new BufferedWriter(new FileWriter(destinationName));
     }
 

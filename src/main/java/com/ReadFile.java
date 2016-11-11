@@ -39,13 +39,12 @@ public class ReadFile implements IReader {
     public final void close() throws IOException {
         this.buffer.close();
     }
-
     /**
      *
      * @return boolean.
      * @throws IOException exception.
      */
     public final boolean hasChars() throws IOException {
-        return buffer.ready();
+            return buffer.ready();
     }
 }

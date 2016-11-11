@@ -8,7 +8,7 @@ import java.io.IOException;
  */
 public class MainTest {
     @Test
-    public void main() throws Exception {
+    public void mains() throws Exception {
         Main.main(null);
     }
 }
