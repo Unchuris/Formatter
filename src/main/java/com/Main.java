@@ -17,11 +17,14 @@ public final class Main {
      * @param args filenames.
      * @throws IOException exception.
      */
-     public static void main(final String[] args) throws IOException {
+     public static void main(final String[] args)
+             throws IOException {
         try {
                 Formatter formatter = new Formatter();
-                IReader source = new ReadFile("src/main/resources/input");
-                IWrite destination = new WriterFile("src/main/resources/output");
+                IReader source = new
+                        ReadFile("src/main/resources/input");
+                IWrite destination = new
+                        WriterFile("src/main/resources/output");
                 formatter.format(source, destination);
                 destination.close();
             } catch (IOException e) {

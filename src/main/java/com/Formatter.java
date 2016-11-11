@@ -5,8 +5,15 @@ import java.io.IOException;
      *edited the text style.
      */
     public final class Formatter implements IFormatter {
-
-        private static void ignoreComment(final IReader source, final IWrite destination) throws IOException {
+        /**
+         *
+         * @param source source file.
+         * @param destination output file.
+         * @throws IOException Exception.
+         */
+        private static void ignoreComment(final IReader source,
+                                          final IWrite destination)
+                throws IOException {
                 char symbol;
                 boolean commentMulti = false;
                 boolean commentOne = false;
@@ -55,7 +62,18 @@ import java.io.IOException;
                 }
         }
 
-        private static void ignoreLiterals(final IReader source, final IWrite destination, final char symbol) throws IOException {
+        /**
+         *
+         * @param source source file.
+         * @param destination output file.
+         * @param symbol symbol.
+         * @throws IOException Exception
+         */
+        private static void
+        ignoreLiterals(final IReader source,
+                                           final IWrite destination,
+                                           final char symbol)
+                throws IOException {
             char copySymbol, newCopySymbol;
             copySymbol = symbol;
             if ((copySymbol == '\'') || (copySymbol == '"')) {
