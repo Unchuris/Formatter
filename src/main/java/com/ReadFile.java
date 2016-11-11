@@ -7,7 +7,7 @@ import java.io.IOException;
 /**
  * Reader.
  */
-public class StringReader implements IReader {
+public class ReadFile implements IReader {
     /**
      * buffer.
      */
@@ -18,7 +18,7 @@ public class StringReader implements IReader {
      * @param sourceName filename.
      * @throws FileNotFoundException exception.
      */
-    public StringReader(final String sourceName) throws FileNotFoundException {
+    public ReadFile(final String sourceName) throws FileNotFoundException {
         buffer = new BufferedReader(new FileReader(sourceName));
     }
 
@@ -30,25 +30,6 @@ public class StringReader implements IReader {
     public final char readChar() throws IOException {
         int c = this.buffer.read();
         return (char) c;
-    }
-
-    /**
-     *
-     * @return string.
-     */
-    public final String toString() {
-        StringBuilder builder = new StringBuilder();
-        char next;
-        try {
-            while (this.hasChars()) {
-                next = this.readChar();
-                builder.append(next);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return builder.toString();
-
     }
 
     /**
