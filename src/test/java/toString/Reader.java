@@ -1,10 +1,10 @@
 package toString;
 
-import com.IReader;
+import com.Core.IReader;
 
 /**
  * interface.
  */
-public interface Reader extends IReader {
+interface Reader extends IReader {
     String toString();
 }

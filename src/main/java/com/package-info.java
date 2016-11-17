@@ -1,4 +1,4 @@
 /**
- * Package containing Formatter.
+ * Package containing Main.
  */
 package com;
