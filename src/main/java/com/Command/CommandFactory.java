@@ -19,60 +19,37 @@ public final class CommandFactory {
     /**
      *
      * @param criteria symbol.
-     * @param next next symbol.
+     * @param symbol next symbol.
      * @return new.
      */
-    public static ICommand getCommand(final char criteria, final char next) {
-        switch (criteria) {
+    public static ICommand getCommand(final char criteria, final char symbol) {
+        switch (symbol) {
             case '{':
-                    if (!check) {
-                        return new OpeningBracket();
-                    } else {
-                        check = false;
-                        return new Skip();
-                     }
+                    return new OpeningBracket();
             case ';':
-                    if (!check) {
                     return new Semicolon();
-                    } else {
-                        check = false;
-                        return new Skip();
-                    }
             case '}':
-                    if (!check) {
                     return new ClosingBracket();
-                    } else {
-                        check = false;
-                        return new Skip();
-                    }
             case '/':
-                    if (!check) {
-                    if (next == '/') {
+                    if (criteria == '/' && !check) {
                         check = true;
-                        return new IgnoreComment(next);
-                    }
-                    if (next == '*') {
-                        check = true;
-                        return new IgnoreMultiComment(next);
-                    }
-                        return new WriterSymbol(criteria);
+                        return new IgnoreComment(symbol);
                     } else {
                         check = false;
-                        return new Skip();
+                        return new WriterSymbol(symbol);
                     }
+            case '*':
+                        if (criteria == '/') {
+                            return new IgnoreMultiComment(symbol);
+                        } else {
+                            return new WriterSymbol(symbol);
+                        }
             case '\'':
-                    check = true;
-                    return new IgnoreLiteral(criteria, next);
+                    return new IgnoreLiteral(symbol);
             case '"':
-                    check = true;
-                    return new IgnoreLiteral(criteria, next);
+                    return new IgnoreLiteral(symbol);
             default:
-                if (!check) {
-                    return new WriterSymbol(criteria);
-                } else {
-                    check = false;
-                    return new Skip();
-                }
+                    return new WriterSymbol(symbol);
         }
     }
 }

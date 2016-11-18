@@ -22,22 +22,22 @@ public final class Formatter implements IFormatter {
                            final IWrite destination)
                 throws FormatterException {
             char previous = 0;
-            char symbol = 0;
+            char symbol;
             try {
                 if (source.hasChars()) {
-                    previous = source.readChar();
+                    symbol = source.readChar();
+                    ICommand command =
+                            CommandFactory.getCommand(previous, symbol);
+                    assert command != null;
+                    command.execute(source, destination);
+                    previous = symbol;
                     while (source.hasChars()) {
                         symbol = source.readChar();
-                        ICommand command =
-                                CommandFactory.getCommand(previous, symbol);
+                        command = CommandFactory.getCommand(previous, symbol);
                         assert command != null;
                         command.execute(source, destination);
                         previous = symbol;
                     }
-                    ICommand command =
-                            CommandFactory.getCommand(previous, '\'');
-                    assert command != null;
-                    command.execute(source, destination);
                 }
                 destination.close();
             } catch (Exception e) {

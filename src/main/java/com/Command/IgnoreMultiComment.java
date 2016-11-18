@@ -13,6 +13,10 @@ class IgnoreMultiComment implements ICommand {
      * symbol.
      */
     private char symbol;
+    /**
+     * /.
+     */
+    private boolean flag;
 
     /**
      *
@@ -29,31 +33,30 @@ class IgnoreMultiComment implements ICommand {
      */
     public void execute(final IReader source, final IWrite destination) {
         try {
-            destination.writeChar('/');
+            flag = true;
             destination.writeChar(symbol);
-        } catch (WriterException e) {
-            e.printStackTrace();
-        }
-        symbol = 0;
-        char previous = 0;
-                try {
-                    if (source.hasChars()) {
-                        previous = source.readChar();
-                        if (source.hasChars()) {
-                            symbol = source.readChar();
-                        }
-                    }
-                    while (symbol != '/' || previous != '*') {
-                        destination.writeChar(previous);
-                        previous = symbol;
+                    while (source.hasChars() && flag) {
                         symbol = source.readChar();
+                        switch (symbol) {
+                            case '*':
+                                destination.writeChar(symbol);
+                                if (source.hasChars()) {
+                                    symbol = source.readChar();
+                                    if (symbol == '/') {
+                                        flag = false;
+                                    }
+                                    destination.writeChar(symbol);
+                                }
+                                break;
+                            default:
+                                destination.writeChar(symbol);
+                        }
+
                     }
-                    destination.writeChar(previous);
-                    destination.writeChar(symbol);
                 } catch (ReaderException e) {
-                    e.printStackTrace();
+                    throw new RuntimeException("Error. ReaderMultiComment");
                 } catch (WriterException e) {
-                    e.printStackTrace();
+                    throw new RuntimeException("Error. WriterMultiComment");
                 }
     }
 }

@@ -30,15 +30,14 @@ class IgnoreComment implements ICommand {
     public void execute(final IReader source, final IWrite destination) {
         try {
             destination.writeChar(symbol);
-            destination.writeChar(symbol);
             while ((symbol != '\n') && (source.hasChars())) {
                 symbol = source.readChar();
                 destination.writeChar(symbol);
             }
         } catch (ReaderException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error. ReaderIgnoreComment");
         } catch (WriterException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error. WriterIgnoreComment");
         }
     }
 }

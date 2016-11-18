@@ -10,10 +10,6 @@ import com.Core.WriterException;
  */
 class IgnoreLiteral implements ICommand {
     /**
-     * c.
-     */
-    private char c;
-    /**
      * symbol.
      */
     private char symbol;
@@ -21,11 +17,9 @@ class IgnoreLiteral implements ICommand {
     /**
      *
      * @param criteria symbol.
-     * @param next next symbol.
      */
-    IgnoreLiteral(final char criteria, final char next) {
+    IgnoreLiteral(final char criteria) {
         this.symbol = criteria;
-        this.c = next;
     }
 
     /**
@@ -34,12 +28,16 @@ class IgnoreLiteral implements ICommand {
      * @param destination output file.
      */
     public void execute(final IReader source, final IWrite destination) {
+        char c = symbol;
         try {
             destination.writeChar(symbol);
-            destination.writeChar(c);
-            while (c != symbol && source.hasChars()) {
-                c = source.readChar();
-                destination.writeChar(c);
+            if (source.hasChars()) {
+                symbol = source.readChar();
+                while (c != symbol && source.hasChars()) {
+                    destination.writeChar(symbol);
+                    symbol = source.readChar();
+                }
+                destination.writeChar(symbol);
             }
         } catch (ReaderException e) {
             e.printStackTrace();
