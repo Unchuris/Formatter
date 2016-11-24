@@ -30,7 +30,7 @@ class WriterSymbol implements ICommand {
         try {
             destination.writeChar(symbol);
         } catch (WriterException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error. WriterIgnoreComment");
         }
     }
 }

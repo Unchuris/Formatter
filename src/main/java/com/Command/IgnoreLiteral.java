@@ -15,7 +15,7 @@ class IgnoreLiteral implements ICommand {
     private char symbol;
 
     /**
-     *
+     * Ignore.
      * @param criteria symbol.
      */
     IgnoreLiteral(final char criteria) {
@@ -29,20 +29,22 @@ class IgnoreLiteral implements ICommand {
      */
     public void execute(final IReader source, final IWrite destination) {
         char c = symbol;
+        char previous = 0;
         try {
             destination.writeChar(symbol);
             if (source.hasChars()) {
                 symbol = source.readChar();
-                while (c != symbol && source.hasChars()) {
+                while ((c != symbol || previous == '\\') && source.hasChars()) {
                     destination.writeChar(symbol);
+                    previous = symbol;
                     symbol = source.readChar();
                 }
                 destination.writeChar(symbol);
             }
         } catch (ReaderException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error. ReaderIgnoreComment");
         } catch (WriterException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error. WriterIgnoreComment");
         }
     }
 }

@@ -8,6 +8,19 @@ import com.Core.WriterException;
  * symbol processing '{'.
  */
 class ClosingBracket implements ICommand {
+    /**
+     * indent.
+     */
+    private final int indent;
+
+    /**
+     *
+     * @param indent indent.
+     */
+    ClosingBracket(final int indent) {
+        this.indent = indent;
+    }
+    /**
 
     /**
      *
@@ -18,15 +31,14 @@ class ClosingBracket implements ICommand {
         try {
             destination.writeChar('}');
             destination.writeChar('\n');
-            Indent.indent--;
-            for (int i = 0; i < Indent.indent; i++) {
+            for (int i = 0; i < indent; i++) {
                 destination.writeChar(' ');
                 destination.writeChar(' ');
                 destination.writeChar(' ');
                 destination.writeChar(' ');
             }
         } catch (WriterException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error. ReaderIgnoreComment");
         }
     }
 }

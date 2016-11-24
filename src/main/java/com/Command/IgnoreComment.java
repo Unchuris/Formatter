@@ -13,13 +13,19 @@ class IgnoreComment implements ICommand {
      * symbol.
      */
     private char symbol;
+    /**
+     * check.
+     */
+    private boolean check;
 
     /**
-     *
+     * Ignore.
      * @param next symbol.
+     * @param check boolean.
      */
-    IgnoreComment(final char next) {
+    IgnoreComment(final char next, final boolean check) {
         this.symbol = next;
+        this.check = check;
     }
 
     /**
@@ -29,15 +35,19 @@ class IgnoreComment implements ICommand {
      */
     public void execute(final IReader source, final IWrite destination) {
         try {
-            destination.writeChar(symbol);
-            while ((symbol != '\n') && (source.hasChars())) {
-                symbol = source.readChar();
+            if (check) {
                 destination.writeChar(symbol);
+                while ((symbol != '\n') && (source.hasChars())) {
+                    symbol = source.readChar();
+                    destination.writeChar(symbol);
+                }
+            } else {
+                destination.writeChar('/');
             }
-        } catch (ReaderException e) {
-            throw new RuntimeException("Error. ReaderIgnoreComment");
-        } catch (WriterException e) {
-            throw new RuntimeException("Error. WriterIgnoreComment");
-        }
+            } catch (ReaderException e) {
+                throw new RuntimeException("Error. ReaderIgnoreComment");
+            } catch (WriterException e) {
+                throw new RuntimeException("Error. WriterIgnoreComment");
+            }
     }
 }

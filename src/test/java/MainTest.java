@@ -8,6 +8,6 @@
 //public class MainTest {
 //    @Test
 //    public void mains() throws Exception, MainException {
-//        Main.main(null);
+//        Main.main(new String[]{"src/main/resources/input", "src/main/resources/output"});
 //    }
 //}

@@ -26,7 +26,7 @@ class RFile extends ReaderFile implements Reader {
                 builder.append(next);
             }
         } catch (ReaderException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error. ReaderIgnoreComment");
         }
         return builder.toString();
     }

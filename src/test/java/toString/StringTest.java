@@ -13,14 +13,51 @@ import static junit.framework.TestCase.assertEquals;
  * string.
  */
 public class StringTest {
+    /**
+     * formatter.
+     */
     private IFormatter formatter;
 
     @Before
     public void setUp() {
         formatter = new Formatter();
     }
+
     @Test
-    public void test() throws FormatterException {
+    public void testMultiComment() throws FormatterException {
+        IReader source = new StringReader("{/*;{}sd;//\n;ds*/f");
+        IWrite destination = new StringWriter();
+        formatter.format(source, destination);
+        assertEquals("{\n    /*;{}sd;//\n;ds*/f", destination.toString());
+    }
+    @Test
+    public void testComment() throws FormatterException {
+        IReader source = new StringReader("{//{};*/\n/{}");
+        IWrite destination = new StringWriter();
+        formatter.format(source, destination);
+        assertEquals("{\n    //{};*/\n/{\n        }\n    ", destination.toString());
+    }
+
+    @Test
+    public void testBracket() throws FormatterException {
+        IReader source = new StringReader("{{{;}");
+        IWrite destination = new StringWriter();
+        formatter.format(source, destination);
+        assertEquals("{\n    {\n        " +
+                        "{\n            ;\n            }\n        ",
+                destination.toString());
+    }
+
+    @Test
+    public void testSpaceIndent() throws FormatterException {
+        IReader source = new StringReader("}}}}}{");
+        IWrite destination = new StringWriter();
+        formatter.format(source, destination);
+        assertEquals("}\n}\n}\n}\n}\n{\n    ", destination.toString());
+    }
+
+    @Test
+    public void testInserted() throws FormatterException {
         IReader source = new StringReader("/*d*///a\n{d}");
         IWrite destination = new StringWriter();
         formatter.format(source, destination);
@@ -41,18 +78,18 @@ public class StringTest {
         assertEquals("/*;{}sd;//\n;ds*/f", destination.toString());
     }
     @Test
-    public void testT() throws FormatterException {
+    public void testSemicolon() throws FormatterException {
         IReader source = new StringReader("{}};{}d");
         IWrite destination = new StringWriter();
         formatter.format(source, destination);
         assertEquals("{\n    }\n}\n;\n{\n    }\nd", destination.toString());
     }
     @Test
-    public void testL() throws FormatterException {
-        IReader source = new StringReader("\"{}{};;\"");
+    public void testIgnoreL() throws FormatterException {
+        IReader source = new StringReader("'{}\"{};;'{");
         IWrite destination = new StringWriter();
         formatter.format(source, destination);
-        assertEquals("\"{}{};;\"", destination.toString());
+        assertEquals("'{}\"{};;'{\n    ", destination.toString());
     }
     @Test
     public void testI() throws FormatterException {
@@ -68,11 +105,11 @@ public class StringTest {
         formatter.format(source, destination);
         assertEquals("a/*sd/{};", destination.toString());
     }
-
-//    @Test
-//    public void ExceptionFormatter() throws ReaderException, FormatterException {
-//        IReader source = Mockito.mock(IReader.class);
-//        Mockito.when(source.readChar()).thenReturn('d');
-//        formatter.format(source, null);
-//    }
+    @Test
+    public void testBracketOne() throws FormatterException {
+        IReader source = new StringReader("{{}");
+        IWrite destination = new StringWriter();
+        formatter.format(source, destination);
+        assertEquals("{\n    {\n        }\n    ", destination.toString());
+    }
 }

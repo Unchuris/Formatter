@@ -5,7 +5,7 @@ import com.Core.ReaderFileNotFoundException;
 /**
  * Exception.
  */
-public class MainException extends Throwable {
+class MainException extends Throwable {
     /**
      *
      * @param massage massage.

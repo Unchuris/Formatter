@@ -13,10 +13,6 @@ class IgnoreMultiComment implements ICommand {
      * symbol.
      */
     private char symbol;
-    /**
-     * /.
-     */
-    private boolean flag;
 
     /**
      *
@@ -33,30 +29,29 @@ class IgnoreMultiComment implements ICommand {
      */
     public void execute(final IReader source, final IWrite destination) {
         try {
-            flag = true;
+            boolean flag = true;
             destination.writeChar(symbol);
-                    while (source.hasChars() && flag) {
-                        symbol = source.readChar();
-                        switch (symbol) {
-                            case '*':
-                                destination.writeChar(symbol);
-                                if (source.hasChars()) {
-                                    symbol = source.readChar();
-                                    if (symbol == '/') {
-                                        flag = false;
-                                    }
-                                    destination.writeChar(symbol);
-                                }
-                                break;
-                            default:
-                                destination.writeChar(symbol);
+            while (source.hasChars() && flag) {
+                symbol = source.readChar();
+                switch (symbol) {
+                    case '*':
+                        destination.writeChar(symbol);
+                        if (source.hasChars()) {
+                            symbol = source.readChar();
+                            if (symbol == '/') {
+                                flag = false;
+                            }
+                            destination.writeChar(symbol);
                         }
-
-                    }
-                } catch (ReaderException e) {
-                    throw new RuntimeException("Error. ReaderMultiComment");
-                } catch (WriterException e) {
-                    throw new RuntimeException("Error. WriterMultiComment");
+                        break;
+                    default:
+                        destination.writeChar(symbol);
                 }
+            }
+        } catch (ReaderException e) {
+            throw new RuntimeException("Error. ReaderMultiComment");
+        } catch (WriterException e) {
+            throw new RuntimeException("Error. WriterMultiComment");
+        }
     }
 }

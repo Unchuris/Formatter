@@ -10,6 +10,18 @@ import com.Core.WriterException;
  */
 class OpeningBracket implements ICommand {
     /**
+     * indent.
+     */
+    private final int indent;
+
+    /**
+     *
+     * @param indent indent.
+     */
+    OpeningBracket(final int indent) {
+        this.indent = indent;
+    }
+    /**
      *
      * @param source source file.
      * @param destination output file.
@@ -18,18 +30,14 @@ class OpeningBracket implements ICommand {
         try {
             destination.writeChar('{');
             destination.writeChar('\n');
-            if (Indent.indent < 0) {
-                Indent.indent = 0;
-            }
-            Indent.indent++;
-            for (int i = 0; i < Indent.indent; i++) {
+            for (int i = 0; i < indent; i++) {
                 destination.writeChar(' ');
                 destination.writeChar(' ');
                 destination.writeChar(' ');
                 destination.writeChar(' ');
             }
         } catch (WriterException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Error. WriterIgnoreComment");
         }
     }
 }

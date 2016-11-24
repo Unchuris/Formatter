@@ -21,21 +21,29 @@ public final class Formatter implements IFormatter {
         public void format(final IReader source,
                            final IWrite destination)
                 throws FormatterException {
+            FormatterState currentState = new FormatterState();
+            boolean check = true;
+            int indent = 0;
             char previous = 0;
             char symbol;
             try {
                 if (source.hasChars()) {
                     symbol = source.readChar();
+                    indent = currentState.getNextState(indent, symbol);
                     ICommand command =
-                            CommandFactory.getCommand(previous, symbol);
+                            CommandFactory.getCommand(previous,
+                                    symbol, indent, true);
                     assert command != null;
                     command.execute(source, destination);
                     previous = symbol;
                     while (source.hasChars()) {
                         symbol = source.readChar();
-                        command = CommandFactory.getCommand(previous, symbol);
+                        indent = currentState.getNextState(indent, symbol);
+                        command = CommandFactory.getCommand(previous,
+                                symbol, indent, check);
                         assert command != null;
                         command.execute(source, destination);
+                        check = currentState.getCheck(previous, symbol, check);
                         previous = symbol;
                     }
                 }
@@ -44,4 +52,4 @@ public final class Formatter implements IFormatter {
                throw new FormatterException(e);
             }
             }
-    }
+}
