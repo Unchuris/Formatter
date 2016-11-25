@@ -1,14 +1,11 @@
 package toString;
 
-import com.Core.*;
-import com.FileIO.ReaderFile;
-import com.FileIO.WriterFile;
-import com.FormatterImplementation.Formatter;
-import com.StringIO.StringReader;
-import com.StringIO.StringWriter;
+import formatter.Core.*;
+import formatter.FileIO.ReaderFile;
+import formatter.FileIO.WriterFile;
+import formatter.FormatterImplementation.Formatter;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 
 import java.io.IOException;
@@ -16,7 +13,7 @@ import java.io.IOException;
 import static junit.framework.TestCase.assertEquals;
 
 /**
- * Test for com.FormatterImplementation.Formatter.
+ * Test for Formatter.
  */
 public class FormatterTest {
 

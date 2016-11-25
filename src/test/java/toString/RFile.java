@@ -1,8 +1,8 @@
 package toString;
 
-import com.Core.ReaderException;
-import com.Core.ReaderFileNotFoundException;
-import com.FileIO.ReaderFile;
+import formatter.Core.ReaderException;
+import formatter.Core.ReaderFileNotFoundException;
+import formatter.FileIO.ReaderFile;
 
 import java.io.FileNotFoundException;
 

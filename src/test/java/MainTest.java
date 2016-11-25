@@ -1,4 +1,4 @@
-//import com.Main;
+//import Main;
 //import com.MainException;
 //import org.junit.Test;
 //

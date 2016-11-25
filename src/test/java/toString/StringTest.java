@@ -1,9 +1,12 @@
 package toString;
 
-import com.Core.*;
-import com.FormatterImplementation.Formatter;
-import com.StringIO.StringReader;
-import com.StringIO.StringWriter;
+import formatter.Core.FormatterException;
+import formatter.Core.IFormatter;
+import formatter.Core.IReader;
+import formatter.Core.IWrite;
+import formatter.FormatterImplementation.Formatter;
+import formatter.StringIO.StringReader;
+import formatter.StringIO.StringWriter;
 import org.junit.Before;
 import org.junit.Test;
 

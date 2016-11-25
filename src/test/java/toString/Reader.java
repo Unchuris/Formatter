@@ -1,6 +1,6 @@
 package toString;
 
-import com.Core.IReader;
+import formatter.Core.IReader;
 
 /**
  * interface.
