@@ -32,30 +32,24 @@ class IgnoreMultiComment implements ICommand {
     public void execute(final IReader source,
                         final IWrite destination,
                         final int indent, final boolean check) {
-        try {
-            boolean flag = true;
-            destination.writeChar(symbol);
-            while (source.hasChars() && flag) {
-                symbol = source.readChar();
-                switch (symbol) {
-                    case '*':
+            try {
+                char c = '/';
+                char previous = 0;
+                destination.writeChar(symbol);
+                if (source.hasChars()) {
+                    symbol = source.readChar();
+                    while ((c != symbol || previous != '*')
+                            && source.hasChars()) {
                         destination.writeChar(symbol);
-                        if (source.hasChars()) {
-                            symbol = source.readChar();
-                            if (symbol == '/') {
-                                flag = false;
-                            }
-                            destination.writeChar(symbol);
-                        }
-                        break;
-                    default:
-                        destination.writeChar(symbol);
+                        previous = symbol;
+                        symbol = source.readChar();
+                    }
+                    destination.writeChar(symbol);
                 }
+            } catch (ReaderException e) {
+                throw new RuntimeException("Error. ReaderMultiComment");
+            } catch (WriterException e) {
+                throw new RuntimeException("Error. WriterMultiComment");
             }
-        } catch (ReaderException e) {
-            throw new RuntimeException("Error. ReaderMultiComment");
-        } catch (WriterException e) {
-            throw new RuntimeException("Error. WriterMultiComment");
-        }
     }
 }

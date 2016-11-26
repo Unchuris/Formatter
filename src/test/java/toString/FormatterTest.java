@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 
+import java.io.File;
 import java.io.IOException;
 
 import static junit.framework.TestCase.assertEquals;
@@ -38,4 +39,12 @@ public class FormatterTest {
 
             assertEquals(rez.toString(), output.toString());
     }
+//    @Test (expected = FormatterException.class)
+//    public void formatter() throws IOException, ReaderFileNotFoundException, ReaderException, FormatterException {
+//        File inF = File.createTempFile("a", null);
+//        WriterFile out = new WriterFile(inF.getAbsolutePath());
+//        ReaderFile in = new ReaderFile(inF.getAbsolutePath());
+//        in.close();
+//        formatter.format(in, out);
+//    }
 }
