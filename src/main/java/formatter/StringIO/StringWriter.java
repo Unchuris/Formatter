@@ -36,7 +36,7 @@ public class StringWriter implements IWrite {
     }
 
     /**
-     * s.
+     * start.
      * @param s char.
      * @throws WriterException exception.
      */

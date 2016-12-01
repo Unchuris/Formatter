@@ -1,4 +1,4 @@
-package toString;
+package StateMachine;
 
 import formatter.Core.ReaderException;
 import formatter.Core.ReaderFileNotFoundException;
@@ -7,7 +7,7 @@ import formatter.FileIO.ReaderFile;
 import java.io.FileNotFoundException;
 
 /**
- * toString.
+ * StateMachine.
  */
 class RFile extends ReaderFile implements Reader {
     /**

@@ -19,7 +19,7 @@ public class StringReader implements IReader {
     private String source;
 
     /**
-     *  s.
+     *  start.
      * @param s symbol.
      */
     public StringReader(final String s) {

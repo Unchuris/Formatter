@@ -1,21 +1,24 @@
-package toString;
+package StateMachine;
 
-import formatter.Core.FormatterException;
-import formatter.Core.IFormatter;
-import formatter.Core.IReader;
-import formatter.Core.IWrite;
+import formatter.Actions.IAction;
+import formatter.Actions.WriterSymbol;
+import formatter.Core.*;
+import formatter.FileIO.ReaderFile;
+import formatter.FileIO.WriterFile;
 import formatter.FormatterImplementation.Formatter;
 import formatter.StringIO.StringReader;
 import formatter.StringIO.StringWriter;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
+
 import static junit.framework.TestCase.assertEquals;
 
 /**
  * string.
  */
-public class StringTest {
+public class StateMachineActionsTest {
     /**
      * formatter.
      */
@@ -25,13 +28,19 @@ public class StringTest {
     public void setUp() {
         formatter = new Formatter();
     }
-
     @Test
     public void testMultiComment() throws FormatterException {
         IReader source = new StringReader("{/*;{}sd;//\n;ds*/f");
         IWrite destination = new StringWriter();
         formatter.format(source, destination);
         assertEquals("{\n    /*;{}sd;//\n;ds*/f", destination.toString());
+    }
+    @Test
+    public void testSlashReverse() throws FormatterException {
+        IReader source = new StringReader("'{};\\{{\";}'");
+        IWrite destination = new StringWriter();
+        formatter.format(source, destination);
+        assertEquals("'{};\\{{\";}'", destination.toString());
     }
     @Test
     public void testComment() throws FormatterException {
@@ -50,7 +59,6 @@ public class StringTest {
                         "{\n            ;\n            }\n        ",
                 destination.toString());
     }
-
     @Test
     public void testSpaceIndent() throws FormatterException {
         IReader source = new StringReader("}}}}}{");
@@ -58,7 +66,6 @@ public class StringTest {
         formatter.format(source, destination);
         assertEquals("}\n}\n}\n}\n}\n{\n    ", destination.toString());
     }
-
     @Test
     public void testInserted() throws FormatterException {
         IReader source = new StringReader("/*d*///a\n{d}");
@@ -95,14 +102,14 @@ public class StringTest {
         assertEquals("'{}\"{};;'{\n    ", destination.toString());
     }
     @Test
-    public void testI() throws FormatterException {
+    public void testIgnoreInserted() throws FormatterException {
         IReader source = new StringReader("//d*/;{}\n");
         IWrite destination = new StringWriter();
         formatter.format(source, destination);
         assertEquals("//d*/;{}\n", destination.toString());
     }
     @Test
-    public void testA() throws FormatterException {
+    public void testMulti() throws FormatterException {
         IReader source = new StringReader("a/*sd/{};");
         IWrite destination = new StringWriter();
         formatter.format(source, destination);
@@ -114,5 +121,16 @@ public class StringTest {
         IWrite destination = new StringWriter();
         formatter.format(source, destination);
         assertEquals("{\n    {\n        }\n    ", destination.toString());
+    }
+    @Test
+    public void  testFileIgnoreLiterals() throws IOException, FormatterException, WriterException, ReaderFileNotFoundException, ReaderException {
+        IReader source = new ReaderFile("src/main/resources/input");
+        IWrite destination = new WriterFile("src/main/resources/output");
+        formatter.format(source, destination);
+        source.close();
+        destination.close();
+        Reader rez = new RFile("src/test/java/rez");
+        Reader output = new RFile("src/main/resources/output");
+        assertEquals(rez.toString(), output.toString());
     }
 }

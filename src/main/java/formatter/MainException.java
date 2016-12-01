@@ -5,7 +5,7 @@ import formatter.Core.ReaderFileNotFoundException;
 /**
  * Exception.
  */
-class MainException extends Throwable {
+public class MainException extends Throwable {
     /**
      *
      * @param massage massage.

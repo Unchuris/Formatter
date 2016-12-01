@@ -37,7 +37,7 @@ public class ReaderFile implements IReader {
      * @throws ReaderException exception.
      */
     public final char readChar() throws ReaderException {
-        int c = 0;
+        int c;
         try {
             c = this.buffer.read();
         } catch (IOException e) {

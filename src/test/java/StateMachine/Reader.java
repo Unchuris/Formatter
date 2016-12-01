@@ -1,4 +1,4 @@
-package toString;
+package StateMachine;
 
 import formatter.Core.IReader;
 

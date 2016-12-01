@@ -1,6 +1,7 @@
 package formatter.FileIO;
 import formatter.Core.IWrite;
 import formatter.Core.WriterException;
+import formatter.Core.WriterFileNotFoundException;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -18,10 +19,15 @@ public class WriterFile implements IWrite {
     /**
      *
      * @param destinationName filename.
-     * @throws IOException exception.
+     * @throws WriterFileNotFoundException exception.
      */
-    public WriterFile(final String destinationName) throws IOException {
-        buffer = new BufferedWriter(new FileWriter(destinationName));
+    public WriterFile(final String destinationName)
+            throws WriterFileNotFoundException {
+        try {
+            buffer = new BufferedWriter(new FileWriter(destinationName));
+        } catch (IOException e) {
+            throw new WriterFileNotFoundException("Can't open file");
+        }
     }
 
     /**

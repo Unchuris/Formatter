@@ -14,7 +14,7 @@ public interface IReader {
     boolean hasChars() throws ReaderException;
 
     /**
-     *
+     * readChar.
      * @return char.
      * @throws ReaderException exception.
      */
