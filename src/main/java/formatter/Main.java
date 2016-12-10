@@ -1,12 +1,14 @@
 package formatter;
 
-import formatter.Core.FormatterException;
-import formatter.Core.IReader;
-import formatter.Core.IWrite;
-import formatter.Core.ReaderFileNotFoundException;
-import formatter.FileIO.ReaderFile;
-import formatter.FileIO.WriterFile;
-import formatter.FormatterImplementation.Formatter;
+import formatter.core.FormatterException;
+import formatter.core.IReader;
+import formatter.core.IWrite;
+import formatter.core.ReaderFileNotFoundException;
+import formatter.fileio.ReaderFile;
+import formatter.fileio.WriterFile;
+import formatter.formatterimplementation.Formatter;
+import formatter.lexem.IToken;
+import formatter.lexem.Lexer;
 
 import java.io.IOException;
 /**
@@ -31,12 +33,12 @@ public final class Main {
          if (args.length == 2) {
              try {
                  Formatter formatter = new Formatter();
-                 IReader source;
-                 source = new
-                         ReaderFile(args[0]);
-                 IWrite destination = new
-                         WriterFile(args[1]);
-                 formatter.format(source, destination);
+                 IReader<Character> source =
+                    new ReaderFile(args[0]);
+                 IWrite<String> destination =
+                         new WriterFile(args[1]);
+                 IReader<IToken> lexer = new Lexer(source);
+                 formatter.format(lexer, destination, source);
              } catch (IOException e) {
                  throw new FormatterException("File is error");
              } catch (ReaderFileNotFoundException e) {

@@ -1,6 +1,6 @@
 package formatter;
 
-import formatter.Core.ReaderFileNotFoundException;
+import formatter.core.ReaderFileNotFoundException;
 
 /**
  * Exception.
