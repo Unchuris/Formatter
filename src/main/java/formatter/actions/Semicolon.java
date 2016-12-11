@@ -8,7 +8,7 @@ import formatter.core.IWrite;
 public class Semicolon implements IAction {
 
     /**
-     * action.
+     * actionlexer.
      * @param destination output file.
      * @param symbol symbol.
      * @param indent indent.

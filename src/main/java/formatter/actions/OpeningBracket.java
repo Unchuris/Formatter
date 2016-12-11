@@ -2,8 +2,6 @@ package formatter.actions;
 
 import formatter.core.IWrite;
 
-
-
 /**
  * symbol processing '{'.
  */

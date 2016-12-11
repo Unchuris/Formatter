@@ -3,6 +3,7 @@ import formatter.core.IReader;
 import formatter.core.ReaderException;
 import formatter.core.ReaderFileNotFoundException;
 import formatter.lexem.IToken;
+import formatter.lexem.StoreSymbol;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -37,8 +38,10 @@ public class ReaderFile implements IReader<Character> {
      * @return char.
      * @throws ReaderException exception.
      * @param lexer lexer.
+     * @param store StoreSymbol.
      */
-    public final Character readChar(final IToken lexer) throws ReaderException {
+    public final char readChar(final IToken lexer,
+                               final StoreSymbol store) throws ReaderException {
         int c;
         try {
             c = this.buffer.read();

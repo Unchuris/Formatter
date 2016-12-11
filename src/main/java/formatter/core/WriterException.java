@@ -9,6 +9,7 @@ public class WriterException extends Exception {
 //    public WriterException() {
 //
 //    }
+
     /**
      * @param message string.
      */

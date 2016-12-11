@@ -11,14 +11,15 @@ public interface IWrite<T> {
 //     * @throws WriterException exception.
 //     */
 //    void writeChar(char c) throws WriterException;
+    //void writeChar(String c) throws WriterException;
 
     /**
      *
      * @param c symbol.
      * @throws WriterException exception.
      */
-    //void writeChar(String c) throws WriterException;
     void writeChar(T c) throws WriterException;
+
     /**
      * close.
      * @throws WriterException exception.

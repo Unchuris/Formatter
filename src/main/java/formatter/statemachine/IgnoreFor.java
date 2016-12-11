@@ -1,19 +1,24 @@
 package formatter.statemachine;
 
 import formatter.actions.IAction;
+import formatter.actions.OpeningBracket;
 import formatter.actions.WriterSymbol;
 
+
 /**
- * PerhapsClose.
+ * For.
  */
-class PerhapsClose implements IState {
+class IgnoreFor implements IState {
     /**
      *
      * @param symbol symbol.
      * @param state state.
-     * @return new.
+     * @return IAction.
      */
     public IAction getAction(final String symbol, final IState state) {
+        if (symbol.equals("{")) {
+            return new OpeningBracket();
+        }
         return new WriterSymbol();
     }
 }

@@ -8,7 +8,7 @@ import formatter.core.WriterException;
  */
 public class WriterIndentSpaces implements IAction {
     /**
-     * action.
+     * actionlexer.
      * @param destination output file.
      * @param symbol symbol.
      * @param indent indent.

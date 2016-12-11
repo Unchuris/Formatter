@@ -9,14 +9,6 @@ public class Indent {
      */
     private int indent = 0;
 
-//    /**
-//     *
-//     * @param space space.
-//     */
-//    public final void space(final int space) {
-//        this.spaces = space;
-//    }
-
     /**
      *
      * @param c indent.
@@ -46,7 +38,7 @@ public class Indent {
      *
      * @return get.
      */
-    public final int getIndent() {
+    final int getIndent() {
         return indent;
     }
 

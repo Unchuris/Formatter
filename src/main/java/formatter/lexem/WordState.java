@@ -1,12 +1,12 @@
 package formatter.lexem;
 
-
 import formatter.actionlexer.IAct;
+import formatter.actionlexer.Word;
 
 /**
- * DefaultToken.
+ * WordState.
  */
-class DefaultToken implements IToken {
+class WordState implements IToken {
     /**
      *
      * @param token token.
@@ -14,7 +14,6 @@ class DefaultToken implements IToken {
      * @return IAct.
      */
     public IAct getAct(final char token, final IToken lexer) {
-        HashMapDef map = new HashMapDef();
-        return map.getMap(token);
+        return new Word();
     }
 }

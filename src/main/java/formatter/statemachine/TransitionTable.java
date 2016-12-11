@@ -5,7 +5,7 @@ import formatter.actions.Indent;
 import java.util.HashMap;
 
 /**
- * formatterimplementation.
+ * TransitionTable.
  */
 public class TransitionTable {
     /**
@@ -25,21 +25,25 @@ public class TransitionTable {
 
         hashMap = new HashMap<StateKey, IState>();
         defaultState = new Default();
-        IState perhapsComment = new PerhapsComment();
+
         IState ignoreComment = new IgnoreComment();
         IState ignoreMultiComment = new IgnoreMultiComment();
-        IState perhapsClose = new PerhapsClose();
+
         IState ignoreLiteral = new IgnoreLiteral();
         IState ignore = new IgnoreLiteralDouble();
         IState check = new CheckSymbol();
         IState checkLiteral = new CheckLiteral();
+        IState ignoreFor = new IgnoreFor();
 
-        hashMap.put(new StateKey(defaultState, "/"), perhapsComment);
-        hashMap.put(new StateKey(perhapsComment, "/"), ignoreComment);
+        hashMap.put(new StateKey(defaultState, "//"), ignoreComment);
         hashMap.put(new StateKey(ignoreComment, "\n"), defaultState);
-        hashMap.put(new StateKey(perhapsComment, "*"), ignoreMultiComment);
-        hashMap.put(new StateKey(ignoreMultiComment, "*"), perhapsClose);
-        hashMap.put(new StateKey(perhapsClose, "/"), defaultState);
+        hashMap.put(new StateKey(defaultState, "/*"), ignoreMultiComment);
+        hashMap.put(new StateKey(ignoreMultiComment, "*/"), defaultState);
+
+        hashMap.put(new StateKey(defaultState, "for"), ignoreFor);
+        hashMap.put(new StateKey(ignoreFor, "{"), defaultState);
+        hashMap.put(new StateKey(ignoreFor, "\n"), defaultState);
+
         hashMap.put(new StateKey(defaultState, "\'"), ignoreLiteral);
         hashMap.put(new StateKey(ignoreLiteral, "\\"), check);
         hashMap.put(new StateKey(check), ignoreLiteral);
@@ -47,7 +51,7 @@ public class TransitionTable {
         hashMap.put(new StateKey(defaultState, "\""), ignore);
         hashMap.put(new StateKey(ignore, "\\"), checkLiteral);
         hashMap.put(new StateKey(checkLiteral), ignore);
-        hashMap.put(new StateKey(ignore, "\'"), defaultState);
+        hashMap.put(new StateKey(ignore, "\""), defaultState);
 
     }
     /**

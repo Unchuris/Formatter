@@ -1,9 +1,11 @@
 package formatter.formatterimplementation;
 
+import formatter.actionlexer.IAct;
 import formatter.actions.IAction;
 import formatter.actions.Indent;
 import formatter.lexem.IToken;
 import formatter.lexem.Lexer;
+import formatter.lexem.StoreSymbol;
 import formatter.statemachine.IState;
 import formatter.statemachine.TransitionTable;
 import formatter.core.IFormatter;
@@ -16,7 +18,6 @@ import formatter.core.IWrite;
  */
 public final class Formatter implements IFormatter {
 
-    //private IReader<Character> in;
     /**
      * Formatter.
      * @param source source file.
@@ -24,29 +25,28 @@ public final class Formatter implements IFormatter {
      * @param in source.
      * @throws FormatterException exception.
      */
-//    public void format(final IReader source,
-//                       final IWrite destination) throws FormatterException {
         public void format(final IReader<IToken> source,
                        final IWrite<String> destination,
                            final IReader<Character> in)
                 throws FormatterException {
         try {
-            //final int space = 4;
             Indent indent = new Indent();
             indent.indent(0);
-            //indent.space(space);
+            StoreSymbol store = new StoreSymbol();
+            store.string((char) 0);
             IAction action;
-            IToken token;
+            IAct actionToken;
+            char token;
             String lexeme;
             TransitionTable currentState = new TransitionTable(indent);
             IState current = currentState.start();
-            Lexer l = new Lexer(in);
-            IToken lexer = null;
-            //IToken lexer = l.start();
+            Lexer next = new Lexer(in);
+            IToken lexer = next.start();
             while (source.hasChars()) {
-                token = source.readChar(lexer);
-                lexeme = token.getLexeme(lexer);
-                lexer = l.getNextStateToken(lexeme, lexer);
+                token = source.readChar(lexer, store);
+                actionToken = lexer.getAct(token, lexer);
+                lexeme = actionToken.getLexeme(token, lexer, in, store);
+                lexer = next.getNextStateToken(lexeme, lexer, token);
                 action  = current.getAction(lexeme, current);
                 action.action(destination, lexeme, indent);
                 current = currentState.getNextState(lexeme, current);

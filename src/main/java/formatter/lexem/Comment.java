@@ -2,11 +2,12 @@ package formatter.lexem;
 
 
 import formatter.actionlexer.IAct;
+import formatter.actionlexer.WriteComment;
 
 /**
- * DefaultToken.
+ * Comment.
  */
-class DefaultToken implements IToken {
+class Comment implements IToken {
     /**
      *
      * @param token token.
@@ -14,7 +15,6 @@ class DefaultToken implements IToken {
      * @return IAct.
      */
     public IAct getAct(final char token, final IToken lexer) {
-        HashMapDef map = new HashMapDef();
-        return map.getMap(token);
+        return new WriteComment();
     }
 }
