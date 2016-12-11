@@ -20,7 +20,6 @@ public class Lexer implements IReader<IToken> {
      */
     private boolean check = true;
 
-
     /**
      * defaultState.
      */
@@ -37,8 +36,8 @@ public class Lexer implements IReader<IToken> {
     private IToken lexer;
 
     /**
+     *  @param in source.
      *
-     * @param in source.
      */
     public Lexer(final IReader<Character> in) {
         this.source = in;
@@ -80,20 +79,18 @@ public class Lexer implements IReader<IToken> {
 
     /**
      *
-     * @param l lexer.
-     * @param store store.
      * @return IToken
      * @throws ReaderException ex.
+     * @param store store.
      */
-    public final char readChar(final IToken l,
-                               final StoreSymbol store) throws ReaderException {
+    public final char readChar(final StoreSymbol store) throws ReaderException {
         char str = store.getString();
         if (str != 0) {
             return str;
         }
-        char c = source.readChar(lexer, store);
+        char c = source.readChar(store);
         while (c == ' ') {
-            c = source.readChar(lexer, store);
+            c = source.readChar(store);
         }
         return c;
     }

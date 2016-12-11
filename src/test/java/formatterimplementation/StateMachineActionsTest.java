@@ -27,6 +27,7 @@ public class StateMachineActionsTest {
     @Before
     public void setUp() {
         formatter = new Formatter();
+
     }
     @Test
     public void testMultiComment() throws FormatterException {

@@ -2,7 +2,6 @@ package formatter.fileio;
 import formatter.core.IReader;
 import formatter.core.ReaderException;
 import formatter.core.ReaderFileNotFoundException;
-import formatter.lexem.IToken;
 import formatter.lexem.StoreSymbol;
 
 import java.io.BufferedReader;
@@ -37,11 +36,9 @@ public class ReaderFile implements IReader<Character> {
      *
      * @return char.
      * @throws ReaderException exception.
-     * @param lexer lexer.
-     * @param store StoreSymbol.
+     * @param store store.
      */
-    public final char readChar(final IToken lexer,
-                               final StoreSymbol store) throws ReaderException {
+    public final char readChar(final StoreSymbol store) throws ReaderException {
         int c;
         try {
             c = this.buffer.read();

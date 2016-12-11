@@ -36,17 +36,17 @@ public final class Formatter implements IFormatter {
             store.string((char) 0);
             IAction action;
             IAct actionToken;
-            char token;
+            char symbol;
             String lexeme;
             TransitionTable currentState = new TransitionTable(indent);
             IState current = currentState.start();
-            Lexer next = new Lexer(in);
-            IToken lexer = next.start();
+            Lexer lexer = new Lexer(in);
+            IToken token = lexer.start();
             while (source.hasChars()) {
-                token = source.readChar(lexer, store);
-                actionToken = lexer.getAct(token, lexer);
-                lexeme = actionToken.getLexeme(token, lexer, in, store);
-                lexer = next.getNextStateToken(lexeme, lexer, token);
+                symbol = source.readChar(store);
+                actionToken = token.getAct(symbol, token);
+                lexeme = actionToken.getLexeme(symbol, in, store);
+                token = lexer.getNextStateToken(lexeme, token, symbol);
                 action  = current.getAction(lexeme, current);
                 action.action(destination, lexeme, indent);
                 current = currentState.getNextState(lexeme, current);

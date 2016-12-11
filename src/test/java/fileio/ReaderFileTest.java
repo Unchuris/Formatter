@@ -39,7 +39,7 @@ public class ReaderFileTest {
     }
     @Test
     public void TestReadChar() throws IOException, ReaderException {
-        assertEquals(reader.readChar(null, null), (char) read.read());
+        assertEquals(reader.readChar(null), (char) read.read());
     }
     @Test(expected = ReaderFileNotFoundException.class)
     public void TestFileNotFoundException() throws ReaderFileNotFoundException {
@@ -48,6 +48,6 @@ public class ReaderFileTest {
     @Test(expected = ReaderException.class)
     public void writeExceptionTest() throws ReaderException, IOException {
         reader.close();
-        reader.readChar(null, null);
+        reader.readChar(null);
     }
 }

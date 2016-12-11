@@ -9,8 +9,9 @@ import formatter.actions.WriterSymbol;
  * For.
  */
 class IgnoreFor implements IState {
+
     /**
-     *
+     * getAction.
      * @param symbol symbol.
      * @param state state.
      * @return IAction.
@@ -18,7 +19,8 @@ class IgnoreFor implements IState {
     public IAction getAction(final String symbol, final IState state) {
         if (symbol.equals("{")) {
             return new OpeningBracket();
+        } else {
+            return new WriterSymbol();
         }
-        return new WriterSymbol();
     }
 }

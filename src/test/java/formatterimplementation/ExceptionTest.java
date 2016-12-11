@@ -24,7 +24,7 @@ public class ExceptionTest {
     @Before
     public void setUp() throws IOException, WriterException, ReaderFileNotFoundException {
         writer = new WriterFile("src/test/java/Test");
-        ReaderFile reader = new ReaderFile("src/test/java/Test");
+        //ReaderFile reader = new ReaderFile("src/test/java/Test");
     }
 
     @Test(expected = RuntimeException.class)

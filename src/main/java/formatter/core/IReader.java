@@ -1,6 +1,5 @@
 package formatter.core;
 
-import formatter.lexem.IToken;
 import formatter.lexem.StoreSymbol;
 
 import java.io.IOException;
@@ -21,11 +20,10 @@ public interface IReader<T> {
      * readChar.
      * @return char.
      * @throws ReaderException exception.
-     * @param lexer lexer.
      * @param store store.
      */
     //char readChar() throws ReaderException;
-    char readChar(IToken lexer, StoreSymbol store) throws ReaderException;
+    char readChar(StoreSymbol store) throws ReaderException;
     /**
      * close.
      * @throws ReaderException exception.

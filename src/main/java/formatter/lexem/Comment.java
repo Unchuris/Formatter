@@ -8,8 +8,10 @@ import formatter.actionlexer.WriteComment;
  * Comment.
  */
 class Comment implements IToken {
+
+
     /**
-     *
+     * getAct.
      * @param token token.
      * @param lexer lexer.
      * @return IAct.
