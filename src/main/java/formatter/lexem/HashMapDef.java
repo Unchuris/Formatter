@@ -7,7 +7,7 @@ import formatter.actionlexer.WriteSymbol;
 import java.util.HashMap;
 
 /**
- * Created by vlad on 11.12.16.
+ * HashMapDef.
  */
 class HashMapDef {
     /**

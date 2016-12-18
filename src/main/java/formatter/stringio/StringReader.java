@@ -2,7 +2,6 @@ package formatter.stringio;
 
 import formatter.core.IReader;
 import formatter.core.ReaderException;
-import formatter.lexem.StoreSymbol;
 
 import java.io.IOException;
 
@@ -40,9 +39,8 @@ public class StringReader implements IReader<Character> {
      *  c.
      * @return char,
      * @throws ReaderException exception.
-     * @param store store.
      */
-    public final char readChar(final StoreSymbol store) throws ReaderException {
+    public final Character readChar() throws ReaderException {
         char c;
         c = source.charAt(pos);
         pos++;
@@ -56,4 +54,5 @@ public class StringReader implements IReader<Character> {
     public void close() throws IOException {
 
     }
+
 }

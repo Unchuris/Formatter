@@ -1,5 +1,6 @@
 package formatter.lexem;
 
+import formatter.actionlexer.IAct;
 import formatter.core.IReader;
 import formatter.core.ReaderException;
 
@@ -19,6 +20,14 @@ public class Lexer implements IReader<IToken> {
      * boolean.
      */
     private boolean check = true;
+    /**
+     * start state.
+     */
+    private boolean start = true;
+    /**
+     * symbol.
+     */
+    private char symbol;
 
     /**
      * defaultState.
@@ -29,18 +38,22 @@ public class Lexer implements IReader<IToken> {
      * HashMap.
      */
     private HashMap<StateKeyToken, IToken> hashMap;
-
     /**
-     * Lexer.
+     * Store.
      */
-    private IToken lexer;
+    private StoreSymbol store = new StoreSymbol();
 
     /**
-     *  @param in source.
+     * Token.
+     */
+    private IToken token;
+    /**
+     * @param in source.
      *
      */
     public Lexer(final IReader<Character> in) {
         this.source = in;
+        store.string((char) 0);
 
         hashMap = new HashMap<StateKeyToken, IToken>();
 
@@ -48,20 +61,15 @@ public class Lexer implements IReader<IToken> {
 
         IToken word = new WordState();
         IToken maybeComment = new Comment();
+        IToken del = new Line();
 
         hashMap.put(new StateKeyToken(defaultState), word);
         hashMap.put(new StateKeyToken(word), defaultState);
         hashMap.put(new StateKeyToken(word, "/"), maybeComment);
         hashMap.put(new StateKeyToken(word, "*"), maybeComment);
+        hashMap.put(new StateKeyToken(word, "\n"), del);
         hashMap.put(new StateKeyToken(maybeComment), word);
-    }
-
-    /**
-     *
-     * @return state.
-     */
-    public final IToken start() {
-        return defaultState;
+        hashMap.put(new StateKeyToken(del), word);
     }
 
     /**
@@ -79,34 +87,60 @@ public class Lexer implements IReader<IToken> {
 
     /**
      *
-     * @return IToken
-     * @throws ReaderException ex.
-     * @param store store.
+     * @return String.
+     * @throws ReaderException Exception.
      */
-    public final char readChar(final StoreSymbol store) throws ReaderException {
-        char str = store.getString();
-        if (str != 0) {
-            return str;
+    public final IToken readChar() throws ReaderException {
+        if (start) {
+            token = defaultState;
+            start = false;
         }
-        char c = source.readChar(store);
-        while (c == ' ') {
-            c = source.readChar(store);
+        symbol = read();
+        IAct actionToken = token.getAct(symbol, token);
+        return new Token(actionToken);
+    }
+    /**
+     *
+     * @return char.
+     * @throws ReaderException Exception.
+     */
+    private char read() throws ReaderException {
+        char c = store.getString();
+        if (c != 0) {
+            return c;
+        } else {
+            c = source.readChar();
+            while (c == ' ') {
+                c = source.readChar();
+            }
         }
         return c;
     }
-
+    /**
+     *
+     * @return lexeme.
+     * @throws ReaderException Exception.
+     */
+    public final String getLexeme() throws ReaderException {
+        IToken t;
+        t = readChar();
+        IAct action = t.getAct(symbol, t);
+        String lexeme = action.getLexeme(symbol, source, store);
+        token = getNextStateToken(lexeme, token, symbol);
+        return lexeme;
+    }
     /**
      *
      * @param sym String.
      * @param s IToken.
-     * @param token char,
+     * @param t char,
      * @return lexer.
      */
-    public final IToken getNextStateToken(final String sym,
-                                          final IToken s, final char token) {
+    private IToken getNextStateToken(final String sym,
+                                     final IToken s, final char t) {
         String symb = sym;
         if (symb.equals("")) {
-            symb = String.valueOf(token);
+            symb = String.valueOf(t);
         }
         if (hashMap.containsKey(new StateKeyToken(s, symb))) {
             return hashMap.get(new StateKeyToken(s, symb));
@@ -125,4 +159,5 @@ public class Lexer implements IReader<IToken> {
     public final void close() throws IOException, ReaderException {
         source.close();
     }
+
 }

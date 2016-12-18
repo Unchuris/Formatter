@@ -2,7 +2,6 @@ package formatter.fileio;
 import formatter.core.IReader;
 import formatter.core.ReaderException;
 import formatter.core.ReaderFileNotFoundException;
-import formatter.lexem.StoreSymbol;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -36,9 +35,8 @@ public class ReaderFile implements IReader<Character> {
      *
      * @return char.
      * @throws ReaderException exception.
-     * @param store store.
      */
-    public final char readChar(final StoreSymbol store) throws ReaderException {
+    public final Character readChar() throws ReaderException {
         int c;
         try {
             c = this.buffer.read();
@@ -59,6 +57,7 @@ public class ReaderFile implements IReader<Character> {
             throw new ReaderException("Can't close the file.");
         }
     }
+
     /**
      *
      * @return boolean.

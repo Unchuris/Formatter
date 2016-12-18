@@ -25,14 +25,14 @@ public class WriterFileTest {
     public void writeOneCharTest() throws WriterException, ReaderException {
         writer.writeChar('q');
         writer.close();
-        char c = reader.readChar(null);
+        char c = reader.readChar();
         assertEquals('q', c);
     }
     @Test
     public void writeCharTest() throws WriterException, ReaderException {
         writer.writeChar("}}");
-        char c = reader.readChar(null);
-        char b = reader.readChar(null);
+        char c = reader.readChar();
+        char b = reader.readChar();
         String a = "" + c + b;
         assertEquals("}}", a);
     }

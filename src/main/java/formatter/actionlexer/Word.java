@@ -38,7 +38,7 @@ public class Word implements IAct {
                 && string != '\'' && string != ' ') {
             lexeme.append(string);
             if (in.hasChars()) {
-                string = in.readChar(store);
+                string = in.readChar();
             } else {
                 check = false;
             }

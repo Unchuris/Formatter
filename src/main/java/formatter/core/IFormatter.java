@@ -9,11 +9,11 @@ public interface IFormatter {
     /**
      *
      * format.
-     * @param source source .
+     * @param source source file.
      * @param destination output file.
-     * @param lexer source file.
+     * @param characterIReader IReader<Character>.
      * @throws FormatterException exception.
      */
-    void format(IReader<IToken> lexer, IWrite<String> destination,
-                IReader<Character> source) throws FormatterException;;
+    void format(IReader<IToken> source, IWrite<String> destination,
+                IReader<Character> characterIReader) throws FormatterException;;
 }

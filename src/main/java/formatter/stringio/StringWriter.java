@@ -35,14 +35,14 @@ public class StringWriter implements IWrite<String> {
         c.append(string);
     }
 
-    /**
-     * start.
-     * @param s char.
-     * @throws WriterException exception.
-     */
-    public final void writeChar(final char s) throws WriterException {
-        c.append(s);
-    }
+//    /**
+//     * start.
+//     * @param s char.
+//     * @throws WriterException exception.
+//     */
+//    public final void writeChar(final char s) throws WriterException {
+//        c.append(s);
+//    }
 
     /**
      *

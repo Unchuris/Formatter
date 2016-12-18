@@ -6,7 +6,6 @@ import formatter.actions.WriterIndentSpaces;
 import formatter.core.FormatterException;
 import formatter.core.ReaderFileNotFoundException;
 import formatter.core.WriterException;
-import formatter.fileio.ReaderFile;
 import formatter.fileio.WriterFile;
 import formatter.formatterimplementation.Formatter;
 import org.junit.Before;

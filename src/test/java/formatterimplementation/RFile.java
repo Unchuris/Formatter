@@ -22,7 +22,7 @@ class RFile extends ReaderFile implements Reader {
         char next;
         try {
             while (this.hasChars()) {
-                next = this.readChar(null);
+                next = this.readChar();
                 builder.append(next);
             }
         } catch (ReaderException e) {

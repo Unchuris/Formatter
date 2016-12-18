@@ -22,16 +22,16 @@ public class WriteComment implements IAct {
                                   final StoreSymbol store)
             throws ReaderException {
         store.string((char) 0);
-        //if (in.hasChars()) {
-            char symbol = in.readChar(store);
+
+            char symbol = in.readChar();
             String str =  String.valueOf(string) + String.valueOf(symbol);
-            if (str.equals("//") || str.equals("/*") || str.equals("*/")) {
-                return str;
+            MapWriteComment map = new MapWriteComment();
+            if (map.getMap(str) != null) {
+                return map.getMap(str);
             } else {
                 store.string(symbol);
                 return String.valueOf(string);
             }
-        //}
-        //return String.valueOf(string);
+
     }
 }

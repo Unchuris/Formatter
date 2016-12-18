@@ -30,6 +30,14 @@ public class StateMachineActionsTest {
 
     }
     @Test
+    public void testLine() throws FormatterException {
+        IReader<Character> source = new StringReader("     Start{\n\n\n\n\n\n\n\n\n\n");
+        IWrite<String> destination = new StringWriter();
+        IReader<IToken> lexer = new Lexer(source);
+        formatter.format(lexer, destination, source);
+        assertEquals("Start{\n    \n", destination.toString());
+    }
+    @Test
     public void testMultiComment() throws FormatterException {
         IReader<Character> source = new StringReader("{/*;{}sd;//\n;ds*/;}");
         IWrite<String> destination = new StringWriter();
@@ -88,7 +96,7 @@ public class StateMachineActionsTest {
         formatter.format(lexer, destination, source);
         assertEquals("/*d*///a\n{\n    d}\n", destination.toString());
     }
-    @Test //fix me for {, }, ;
+    @Test
     public void testChar() throws FormatterException {
         IReader<Character> source = new StringReader("d");
         IWrite<String> destination = new StringWriter();
@@ -122,7 +130,7 @@ public class StateMachineActionsTest {
     }
     @Test
     public void testIgnoreInserted() throws FormatterException {
-        IReader<Character> source = new StringReader("//d*/;{}\n");
+        IReader<Character> source = new StringReader("//d*/;{}\n\n\n\n\n\n");
         IWrite<String> destination = new StringWriter();
         IReader<IToken> lexer = new Lexer(source);
         formatter.format(lexer, destination, source);
@@ -154,11 +162,11 @@ public class StateMachineActionsTest {
     }
     @Test
     public void testFor() throws FormatterException {
-        IReader<Character> source = new StringReader(" for (;) \n;");
+        IReader<Character> source = new StringReader(" for (;) \n\n\n\n\n\n");
         IWrite<String> destination = new StringWriter();
         IReader<IToken> lexer = new Lexer(source);
         formatter.format(lexer, destination, source);
-        assertEquals("for (;) \n;\n", destination.toString());
+        assertEquals("for (;) \n", destination.toString());
     }
     @Test
     public void testForBracket() throws FormatterException {
