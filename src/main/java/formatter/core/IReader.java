@@ -3,8 +3,8 @@ package formatter.core;
 import java.io.IOException;
 
 /**
- * Interface to read.
- * @param <T> t.
+ *
+ * @param <T> String/Character.
  */
 public interface IReader<T> {
     /**
@@ -15,11 +15,11 @@ public interface IReader<T> {
     boolean hasChars() throws ReaderException;
 
     /**
-     * readChar.
+     * readLexeme.
      * @return char.
      * @throws ReaderException exception.
      */
-    T readChar() throws ReaderException;
+    T readLexeme() throws ReaderException;
     /**
      * close.
      * @throws ReaderException exception.

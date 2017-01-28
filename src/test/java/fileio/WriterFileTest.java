@@ -5,6 +5,7 @@ import formatter.fileio.ReaderFile;
 import formatter.fileio.WriterFile;
 
 import java.io.IOException;
+import formatter.stringio.StringWriter;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,14 +26,14 @@ public class WriterFileTest {
     public void writeOneCharTest() throws WriterException, ReaderException {
         writer.writeChar('q');
         writer.close();
-        char c = reader.readChar();
+        char c = reader.readLexeme();
         assertEquals('q', c);
     }
     @Test
     public void writeCharTest() throws WriterException, ReaderException {
         writer.writeChar("}}");
-        char c = reader.readChar();
-        char b = reader.readChar();
+        char c = reader.readLexeme();
+        char b = reader.readLexeme();
         String a = "" + c + b;
         assertEquals("}}", a);
     }
@@ -44,5 +45,15 @@ public class WriterFileTest {
     @Test(expected = WriterFileNotFoundException.class)
     public void TestFileNotFoundException() throws WriterFileNotFoundException {
         writer = new WriterFile("/");
+    }
+    @Test(expected = RuntimeException.class)
+    public void TestCloseFile() throws WriterException {
+        StringWriter fileWriter = new StringWriter();
+        fileWriter.close();
+    }
+    @Test(expected = WriterException.class)
+    public void TestExeptionWriteString() throws WriterException {
+        writer.close();
+        writer.writeChar("test");
     }
 }

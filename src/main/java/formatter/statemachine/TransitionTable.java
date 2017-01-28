@@ -19,12 +19,12 @@ public class TransitionTable {
 
     /**
      * TransitionTable.
-     * @param indent indent,
      */
-    public TransitionTable(final Indent indent) {
-
+    public TransitionTable() {
+        Indent indent = new Indent();
+        indent.indent(0);
         hashMap = new HashMap<StateKey, IState>();
-        defaultState = new Default();
+        defaultState = new Default(indent);
 
         IState ignoreComment = new IgnoreComment();
         IState ignoreMultiComment = new IgnoreMultiComment();
@@ -33,7 +33,7 @@ public class TransitionTable {
         IState ignore = new IgnoreLiteralDouble();
         IState check = new CheckSymbol();
         IState checkLiteral = new CheckLiteral();
-        IState ignoreFor = new IgnoreFor();
+        IState ignoreFor = new IgnoreFor(indent);
 
         hashMap.put(new StateKey(defaultState, "//"), ignoreComment);
         hashMap.put(new StateKey(ignoreComment, "\n"), defaultState);
@@ -58,7 +58,7 @@ public class TransitionTable {
      * Initial state.
      * @return defaultState.
      */
-    public final IState start() {
+    public final IState getInitializationState() {
         return defaultState;
     }
 

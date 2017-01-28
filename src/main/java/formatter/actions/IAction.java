@@ -1,16 +1,13 @@
 package formatter.actions;
 
-import formatter.core.IWrite;
-
 /**
- * Interface for action.
+ * Interface for execute.
  */
 public interface IAction {
     /**
-     * Action.
-     * @param destination output file.
+     *
      * @param symbol symbol.
-     * @param indent indent.
+     * @return String.
      */
-    void action(IWrite<String> destination, String symbol, Indent indent);
+    String execute(String symbol);
 }

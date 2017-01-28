@@ -1,30 +1,33 @@
 package formatter.actions;
 
-import formatter.core.IWrite;
-import formatter.core.WriterException;
-
 /**
  * Write.
  */
-public class WriterIndentSpaces implements IAction {
+class WriterIndentSpaces implements IAction {
     /**
-     * actionlexer.
-     * @param destination output file.
-     * @param symbol symbol.
-     * @param indent indent.
+     * indent.
      */
-    public final void action(final IWrite<String> destination,
-                             final String symbol, final Indent indent) {
-        try {
-            destination.writeChar(symbol);
-            destination.writeChar("\n");
+    private Indent indent;
+    /**
+     *
+     * @param i indent.
+     */
+    WriterIndentSpaces(final Indent i) {
+        this.indent = i;
+    }
+
+    /**
+     *
+     * @param symbol symbol.
+     * @return String;
+     */
+    public final String execute(final String symbol) {
+            String ind = "";
             for (int i = 0; i < indent.getIndent(); i++) {
                 for (int j = 0; j < indent.getSpaces(); j++) {
-                    destination.writeChar(" ");
+                    ind = " " + ind;
                 }
             }
-        } catch (WriterException e) {
-            throw new RuntimeException("Error. WriterIgnoreComment");
-        }
+        return symbol + "\n" + ind;
     }
 }

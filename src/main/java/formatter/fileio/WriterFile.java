@@ -1,5 +1,5 @@
 package formatter.fileio;
-import formatter.core.IWrite;
+import formatter.core.IWriter;
 import formatter.core.WriterException;
 import formatter.core.WriterFileNotFoundException;
 
@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Writer.
  */
-public class WriterFile implements IWrite<String> {
+public class WriterFile implements IWriter<String> {
     /**
      * buffer.
      */

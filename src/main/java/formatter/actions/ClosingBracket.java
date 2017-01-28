@@ -1,22 +1,30 @@
 package formatter.actions;
 
-import formatter.core.IWrite;
-
 /**
  * symbol processing '}'.
  */
 public class ClosingBracket implements IAction {
+    /**
+     * indent.
+     */
+    private Indent indent;
 
     /**
-     * Action.
-     * @param destination output file.
-     * @param symbol symbol.
-     * @param indent indent.
+     *
+     * @param ind indent.
      */
-    public final void action(final IWrite<String> destination,
-                             final String symbol, final Indent indent) {
+    public ClosingBracket(final Indent ind) {
+        this.indent = ind;
+    }
+
+    /**
+     *
+     * @param symbol symbol.
+     * @return String;
+     */
+    public final String execute(final String symbol) {
         indent.decIndent();
-        IAction write = new WriterIndentSpaces();
-        write.action(destination, symbol, indent);
+        IAction write = new WriterIndentSpaces(indent);
+        return write.execute(symbol);
     }
 }

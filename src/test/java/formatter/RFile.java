@@ -1,4 +1,4 @@
-package formatterimplementation;
+package formatter;
 
 import formatter.core.ReaderException;
 import formatter.core.ReaderFileNotFoundException;
@@ -22,7 +22,7 @@ class RFile extends ReaderFile implements Reader {
         char next;
         try {
             while (this.hasChars()) {
-                next = this.readChar();
+                next = this.readLexeme();
                 builder.append(next);
             }
         } catch (ReaderException e) {

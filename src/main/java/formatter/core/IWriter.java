@@ -4,7 +4,7 @@ package formatter.core;
  * Interface to write.
  * @param <T> t.
  */
-public interface IWrite<T> {
+public interface IWriter<T> {
 //    /**
 //     * write char.
 //     * @param c writeChar.

@@ -1,21 +1,29 @@
 package formatter.actions;
 
-import formatter.core.IWrite;
 
 /**
  * symbol processing ';'.
  */
 public class Semicolon implements IAction {
+    /**
+     * indent.
+     */
+    private Indent indent;
+    /**
+     *
+     * @param ind indent.
+     */
+    public Semicolon(final Indent ind) {
+        this.indent = ind;
+    }
 
     /**
-     * actionlexer.
-     * @param destination output file.
+     *
      * @param symbol symbol.
-     * @param indent indent.
+     * @return String;
      */
-    public final void action(final IWrite<String> destination,
-                             final String symbol, final Indent indent) {
-        IAction write = new WriterIndentSpaces();
-        write.action(destination, symbol, indent);
+    public final String execute(final String symbol) {
+        IAction write = new WriterIndentSpaces(indent);
+        return write.execute(symbol);
     }
 }

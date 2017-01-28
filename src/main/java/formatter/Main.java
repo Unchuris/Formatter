@@ -1,14 +1,15 @@
 package formatter;
 
+import formatter.actions.Indent;
 import formatter.core.FormatterException;
 import formatter.core.IReader;
-import formatter.core.IWrite;
+import formatter.core.IWriter;
 import formatter.core.ReaderFileNotFoundException;
 import formatter.fileio.ReaderFile;
 import formatter.fileio.WriterFile;
 import formatter.formatterimplementation.Formatter;
-import formatter.lexem.IToken;
-import formatter.lexem.Lexer;
+import formatter.lexeme.Lexer;
+import formatter.statemachine.TransitionTable;
 
 import java.io.IOException;
 /**
@@ -32,13 +33,16 @@ public final class Main {
              throws FormatterException, MainException {
          if (args.length == 2) {
              try {
-                 Formatter formatter = new Formatter();
+                 TransitionTable transitionTable = new TransitionTable();
+                 Formatter formatter = new Formatter(transitionTable);
                  IReader<Character> source =
                     new ReaderFile(args[0]);
-                 IWrite<String> destination =
+                 IWriter<String> destination =
                          new WriterFile(args[1]);
-                 IReader<IToken> lexer = new Lexer(source);
-                 formatter.format(lexer, destination, source);
+                 IReader<String> lexer = new Lexer(source);
+                 formatter.format(lexer, destination);
+                 Indent indent = new Indent();
+                 indent.indent(0);
              } catch (IOException e) {
                  throw new FormatterException("File is error");
              } catch (ReaderFileNotFoundException e) {

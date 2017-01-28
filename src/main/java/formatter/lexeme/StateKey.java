@@ -1,24 +1,24 @@
-package formatter.lexem;
+package formatter.lexeme;
 
 /**
  * StateKey.
  */
-class StateKeyToken {
+class StateKey {
     /**
      * state.
      */
-    private IToken key;
+    private State key;
     /**
      * symbol.
      */
-    private String value;
+    private Character value;
 
     /**
      * beforeState.
      * @param state state.
      * @param symbol symbol.
      */
-    StateKeyToken(final IToken state, final String symbol) {
+    StateKey(final State state, final Character symbol) {
         key = state;
         this.value = symbol;
     }
@@ -27,7 +27,7 @@ class StateKeyToken {
      * StateKey.
      * @param state state.
      */
-    StateKeyToken(final IToken state) {
+    StateKey(final State state) {
         key = state;
     }
 
@@ -39,7 +39,7 @@ class StateKeyToken {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        StateKeyToken entry = (StateKeyToken) o;
+        StateKey entry = (StateKey) o;
         return key != null ? key.equals(entry.key) : entry.key == null
                 && (value != null ? value.equals(entry.value)
                 : entry.value == null);

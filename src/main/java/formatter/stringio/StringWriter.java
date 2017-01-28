@@ -1,12 +1,12 @@
 package formatter.stringio;
 
-import formatter.core.IWrite;
+import formatter.core.IWriter;
 import formatter.core.WriterException;
 
 /**
  * String writer.
  */
-public class StringWriter implements IWrite<String> {
+public class StringWriter implements IWriter<String> {
     /**
      * c.
      */
@@ -48,7 +48,7 @@ public class StringWriter implements IWrite<String> {
      *
      * @throws WriterException exception.
      */
-    public void close() throws WriterException {
-
+    public final void close() throws WriterException {
+        throw new RuntimeException();
     }
 }

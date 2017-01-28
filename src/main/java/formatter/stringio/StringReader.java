@@ -40,7 +40,7 @@ public class StringReader implements IReader<Character> {
      * @return char,
      * @throws ReaderException exception.
      */
-    public final Character readChar() throws ReaderException {
+    public final Character readLexeme() throws ReaderException {
         char c;
         c = source.charAt(pos);
         pos++;

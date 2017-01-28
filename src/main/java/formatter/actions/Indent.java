@@ -49,5 +49,4 @@ public class Indent {
     final int getSpaces() {
         return 4;
     }
-
 }

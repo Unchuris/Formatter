@@ -1,10 +1,13 @@
 package formatter.statemachine;
 
-import formatter.actions.ClosingBracket;
+
+
 import formatter.actions.IAction;
+import formatter.actions.Indent;
 import formatter.actions.OpeningBracket;
 import formatter.actions.Semicolon;
 import formatter.actions.WriterSymbol;
+import formatter.actions.ClosingBracket;
 
 import java.util.HashMap;
 
@@ -18,13 +21,14 @@ class HashMapDefault {
     private HashMap<String, IAction> hashMap;
 
     /**
-     * HashMap.
+     *
+     * @param indent indent.
      */
-    HashMapDefault() {
+    HashMapDefault(final Indent indent) {
         hashMap = new HashMap<String, IAction>();
-        hashMap.put("{", new OpeningBracket());
-        hashMap.put("}", new ClosingBracket());
-        hashMap.put(";", new Semicolon());
+        hashMap.put("{", new OpeningBracket(indent));
+        hashMap.put("}", new ClosingBracket(indent));
+        hashMap.put(";", new Semicolon(indent));
     }
 
     /**

@@ -36,7 +36,7 @@ public class ReaderFile implements IReader<Character> {
      * @return char.
      * @throws ReaderException exception.
      */
-    public final Character readChar() throws ReaderException {
+    public final Character readLexeme() throws ReaderException {
         int c;
         try {
             c = this.buffer.read();
@@ -65,9 +65,12 @@ public class ReaderFile implements IReader<Character> {
      */
     public final boolean hasChars() throws ReaderException {
         try {
-            return buffer.ready();
+            buffer.mark(1);
+            int c = buffer.read();
+            buffer.reset();
+            return c != -1;
         } catch (IOException e) {
-            throw new ReaderException("Buffer isn't ready.");
+            throw new ReaderException("error.");
         }
     }
 }

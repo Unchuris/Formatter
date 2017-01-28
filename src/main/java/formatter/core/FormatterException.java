@@ -4,12 +4,6 @@ package formatter.core;
  * Exception.
  */
 public class FormatterException extends Exception {
-//    /**
-//     * Formatter.
-//     */
-//    public FormatterException() {
-//
-//    }
 
     /**
      * @param message string.
@@ -26,12 +20,4 @@ public class FormatterException extends Exception {
         super(error);
     }
 
-//    /**
-//     *
-//     * @param message message.
-//     * @param error error.
-//     */
-//    public FormatterException(final String message, final Throwable error) {
-//        super(message, error);
-//    }
 }
